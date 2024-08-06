@@ -82,6 +82,10 @@
   object-fit: cover;
 }
 
+.test-class{
+  background-color: transparent;
+}
+
 .fly_private_first_section-img-container {
   display: grid;
   place-items: center;
