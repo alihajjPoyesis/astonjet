@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('ABSPATH')) {
   exit; // Exit if accessed directly.
 }
@@ -33,6 +32,7 @@ class Elementor_time_roulette_Widget extends \Elementor\Widget_Base
   // Widget controls
   protected function register_controls()
   {
+    // Content Section
     $this->start_controls_section(
       'content_section',
       [
@@ -40,119 +40,262 @@ class Elementor_time_roulette_Widget extends \Elementor\Widget_Base
         'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
       ]
     );
+
+    // Repeater for times
+    $repeater = new \Elementor\Repeater();
+
+    $repeater->add_control(
+      'time',
+      [
+        'label' => esc_html__('Time', 'custom-widget'),
+        'type' => \Elementor\Controls_Manager::TEXT,
+        'default' => esc_html__('8:00AM', 'custom-widget'),
+        'label_block' => true,
+      ]
+    );
+
+    $repeater->add_control(
+      'text',
+      [
+        'label' => esc_html__('Text', 'custom-widget'),
+        'type' => \Elementor\Controls_Manager::TEXT,
+        'default' => esc_html__('Online flight request', 'custom-widget'),
+        'label_block' => true,
+      ]
+    );
+
+    $repeater->add_control(
+      'image',
+      [
+        'label' => esc_html__('Image', 'custom-widget'),
+        'type' => \Elementor\Controls_Manager::MEDIA,
+        'default' => [
+          'url' => \Elementor\Utils::get_placeholder_image_src(),
+        ],
+      ]
+    );
+
+    $this->add_control(
+      'times',
+      [
+        'label' => esc_html__('Times', 'custom-widget'),
+        'type' => \Elementor\Controls_Manager::REPEATER,
+        'fields' => $repeater->get_controls(),
+        'default' => [
+          [
+            'time' => esc_html__('8:00AM', 'custom-widget'),
+            'text' => esc_html__('Online flight request', 'custom-widget'),
+            'image' => ['url' => \Elementor\Utils::get_placeholder_image_src()],
+          ],
+        ],
+        'title_field' => '{{{ time }}} - {{{ text }}}',
+      ]
+    );
+
+    // Controls for time_roulette-right-section content
+    $this->add_control(
+      'title',
+      [
+        'label' => esc_html__('Title', 'custom-widget'),
+        'type' => \Elementor\Controls_Manager::TEXT,
+        'default' => esc_html__('Time Efficiency', 'custom-widget'),
+        'label_block' => true,
+      ]
+    );
+
+    $this->add_control(
+      'sub_title',
+      [
+        'label' => esc_html__('Sub Title', 'custom-widget'),
+        'type' => \Elementor\Controls_Manager::TEXT,
+        'default' => esc_html__('Maximize your productivity', 'custom-widget'),
+        'label_block' => true,
+      ]
+    );
+
+    $this->add_control(
+      'description',
+      [
+        'label' => esc_html__('Description', 'custom-widget'),
+        'type' => \Elementor\Controls_Manager::TEXTAREA,
+        'default' => esc_html__('Private flying means no long security lines, no waiting at the gate, and no layovers. Board minutes before departure and arrive just as efficiently. Spend less time in transit and more time where it matters most – at your destination or with your loved ones.', 'custom-widget'),
+        'label_block' => true,
+      ]
+    );
+
+    $this->end_controls_section();
+
+    // Style Section
+    $this->start_controls_section(
+      'style_section',
+      [
+        'label' => esc_html__('Style', 'custom-widget'),
+        'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+      ]
+    );
+
+    $this->add_control(
+      'active_time_color',
+      [
+        'label' => esc_html__('Active Time Color', 'custom-widget'),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'selectors' => [
+          '{{WRAPPER}} .time-entry.active .time' => 'color: {{VALUE}};',
+        ],
+      ]
+    );
+
+    $this->add_group_control(
+      \Elementor\Group_Control_Typography::get_type(),
+      [
+        'name' => 'active_time_typography',
+        'label' => esc_html__('Active Time Typography', 'custom-widget'),
+        'selector' => '{{WRAPPER}} .time-entry.active .time',
+      ]
+    );
+
+    $this->add_control(
+      'non_active_time_color',
+      [
+        'label' => esc_html__('Non-Active Time Color', 'custom-widget'),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'selectors' => [
+          '{{WRAPPER}} .time-entry:not(.active) .time' => 'color: {{VALUE}};',
+        ],
+      ]
+    );
+
+    $this->add_group_control(
+      \Elementor\Group_Control_Typography::get_type(),
+      [
+        'name' => 'non_active_time_typography',
+        'label' => esc_html__('Non-Active Time Typography', 'custom-widget'),
+        'selector' => '{{WRAPPER}} .time-entry:not(.active) .time',
+      ]
+    );
+
+    $this->add_control(
+      'active_text_color',
+      [
+        'label' => esc_html__('Active Text Color', 'custom-widget'),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'selectors' => [
+          '{{WRAPPER}} .time-entry.active .text' => 'color: {{VALUE}};',
+        ],
+      ]
+    );
+
+    $this->add_group_control(
+      \Elementor\Group_Control_Typography::get_type(),
+      [
+        'name' => 'active_text_typography',
+        'label' => esc_html__('Active Text Typography', 'custom-widget'),
+        'selector' => '{{WRAPPER}} .time-entry.active .text',
+      ]
+    );
+
+    $this->add_control(
+      'non_active_text_color',
+      [
+        'label' => esc_html__('Non-Active Text Color', 'custom-widget'),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'selectors' => [
+          '{{WRAPPER}} .time-entry:not(.active) .text' => 'color: {{VALUE}};',
+        ],
+      ]
+    );
+
+    $this->add_group_control(
+      \Elementor\Group_Control_Typography::get_type(),
+      [
+        'name' => 'non_active_text_typography',
+        'label' => esc_html__('Non-Active Text Typography', 'custom-widget'),
+        'selector' => '{{WRAPPER}} .time-entry:not(.active) .text',
+      ]
+    );
+    // Add these controls inside the register_controls() method in the appropriate section
+    $this->add_control(
+      'title_color',
+      [
+        'label' => esc_html__('Title Color', 'custom-widget'),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'selectors' => [
+          '{{WRAPPER}} .time_roulette-right-section .title' => 'color: {{VALUE}};',
+        ],
+      ]
+    );
+
+    $this->add_group_control(
+      \Elementor\Group_Control_Typography::get_type(),
+      [
+        'name' => 'title_typography',
+        'label' => esc_html__('Title Typography', 'custom-widget'),
+        'selector' => '{{WRAPPER}} .time_roulette-right-section .title',
+      ]
+    );
+
+    $this->add_control(
+      'sub_title_color',
+      [
+        'label' => esc_html__('Sub Title Color', 'custom-widget'),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'selectors' => [
+          '{{WRAPPER}} .time_roulette-right-section .sub-title' => 'color: {{VALUE}};',
+        ],
+      ]
+    );
+
+    $this->add_group_control(
+      \Elementor\Group_Control_Typography::get_type(),
+      [
+        'name' => 'sub_title_typography',
+        'label' => esc_html__('Sub Title Typography', 'custom-widget'),
+        'selector' => '{{WRAPPER}} .time_roulette-right-section .sub-title',
+      ]
+    );
+
+    $this->add_control(
+      'description_color',
+      [
+        'label' => esc_html__('Description Color', 'custom-widget'),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'selectors' => [
+          '{{WRAPPER}} .time_roulette-right-section .description' => 'color: {{VALUE}};',
+        ],
+      ]
+    );
+
+    $this->add_group_control(
+      \Elementor\Group_Control_Typography::get_type(),
+      [
+        'name' => 'description_typography',
+        'label' => esc_html__('Description Typography', 'custom-widget'),
+        'selector' => '{{WRAPPER}} .time_roulette-right-section .description',
+      ]
+    );
     $this->end_controls_section();
   }
 
   protected function render()
   {
-    $times = [
-      ["time" => "8:00AM", "text" => "Online flight request", "image" => "url-to-image-1.jpg"],
-      ["time" => "8:15AM", "text" => "Flight Confirmation", "image" => "url-to-image-2.jpg"],
-      ["time" => "8:30AM", "text" => "Luggage Check-in", "image" => "url-to-image-3.jpg"],
-      ["time" => "8:45AM", "text" => "Boarding", "image" => "url-to-image-4.jpg"],
-      ["time" => "9:00AM", "text" => "Takeoff", "image" => "url-to-image-5.jpg"],
-    ];
+    $settings = $this->get_settings_for_display();
+    $times = $settings['times'];
     ?>
     <style>
-      #time-list {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        height: 70%;
-      }
 
-      .time-entry {
-        cursor: pointer;
-        position: absolute;
-        opacity: 0;
-        animation: fadeIn 5s forwards;
-      }
-
-      .time-entry.active .time::before {
-        opacity: 1;
-      }
-
-      .time-entry .time::before {
-        content: "";
-        display: block;
-        width: 20px;
-        height: 20px;
-        background-image: url("https://poyesisdemo.fr/astonjet/wp-content/uploads/2024/08/9ff488ef0aee8292a7980cb531486062-scaled.webp");
-        background-size: cover;
-        border-radius: 50%;
-        position: absolute;
-        top: 40%;
-        left: -44px;
-        transform: translateY(-50%);
-        opacity: 0.5;
-      }
-
-      .time-entry .time {
-        font-size: 70px;
-      }
-
-      .active {
-        font-weight: bold;
-        color: red;
-      }
-
-      .previous {
-        color: gray;
-      }
-
-      .next {
-        color: blue;
-      }
-
-      .time_roulette-main-container {
-        height: 100vh;
-      }
-
-      .bg-img-changer {
-        background-image: url('http://localhost/astonjet/wp-content/uploads/2024/08/Rectangle-162.webp');
-        background-size: cover;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-
-      .time-entry.active {
-        left: 145px;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-
-      .time-entry.next {
-        left: 115px;
-        transform: rotate(30deg);
-        bottom: 0;
-      }
-
-      .time-entry.previous {
-        left: 115px;
-        transform: rotate(-30deg);
-        top: 0;
-      }
-/* active-to-prev  */
-      @keyframes active-to-prev {
-        0% {
-          opacity: 0.5;
-        }
-
-        100% {
-          opacity: 1;
-        }
-      }
     </style>
     <div class="time_roulette-main-container">
       <div class="time-image bg-img-changer"></div>
+      <div class="time_roulette-right-section">
+        <div class="title text-clip-bg"><?php echo esc_html($settings['title']); ?></div>
+        <div class="sub-title"><?php echo esc_html($settings['sub_title']); ?></div>
+        <div class="description"><?php echo esc_html($settings['description']); ?></div>
+      </div>
       <div id="time-list">
         <?php foreach ($times as $index => $entry) { ?>
           <div class="time-entry" data-index="<?php echo $index; ?>">
-            <div class="time"><?php echo $entry["time"]; ?></div>
-            <div class="text"><?php echo $entry["text"]; ?></div>
+            <div class="time"><?php echo esc_html($entry["time"]); ?></div>
+            <div class="text"><?php echo esc_html($entry["text"]); ?></div>
           </div>
         <?php } ?>
       </div>
@@ -162,45 +305,43 @@ class Elementor_time_roulette_Widget extends \Elementor\Widget_Base
         let times = <?php echo json_encode($times); ?>;
         let activeIndex = 0;
 
-        function updateTimes() {
-          $('#time-list').empty();
-          for (let i = 0; i < times.length; i++) {
-            let entryClass = 'time-entry';
-            if (i === activeIndex) {
-              entryClass += ' active';
-              $('#time-list').append(`
-                                                <div class="${entryClass}" data-index="${i}">
-                                                    <div class="time">${times[i].time}</div>
-                                                    <div class="text">${times[i].text}</div>
-                                                </div>
-                                            `);
-            } else if (i === activeIndex - 1) {
-              entryClass += ' previous';
-              $('#time-list').append(`
-                                                <div class="${entryClass}" data-index="${i}">
-                                                    <div class="time">${times[i].time}</div>
-                                                    <div class="text">${times[i].text}</div>
-                                                </div>
-                                            `);
-            } else if (i === activeIndex + 1) {
-              entryClass += ' next';
-              $('#time-list').append(`
-                                                <div class="${entryClass}" data-index="${i}">
-                                                    <div class="time">${times[i].time}</div>
-                                                    <div class="text">${times[i].text}</div>
-                                                </div>
-                                            `);
-            }
-          }
+        function updateTimes(direction) {
+          // Remove existing classes
+          $('.time-entry').removeClass('active next previous active-to-prev active-to-next prev-to-active next-to-active show-next show-prev next-out prev-out');
 
-          $('.time-image').attr('background-image', `url("${times[activeIndex].image}")`);
+          // Add classes based on the current active index
+          $('.time-entry').each(function () {
+            let index = $(this).data('index');
+            if (index === activeIndex) {
+              $(this).addClass('active');
+            } else if (index === activeIndex - 1) {
+              $(this).addClass('previous');
+            } else if (index === activeIndex + 1) {
+              $(this).addClass('next');
+            } else {
+              $(this).addClass('hidden');
+            }
+          });
+          $('.time-image').css('background-image', `url("${times[activeIndex].image.url}")`);
+
+          if (direction === 'next') {
+            $('.time-entry.active').addClass('next-to-active');
+            $('.time-entry.previous').addClass('active-to-prev');
+            $('.time-entry.next').addClass('show-next');
+          } else if (direction === 'prev') {
+            $('.time-entry.active').addClass('prev-to-active');
+            $('.time-entry.next').addClass('active-to-next');
+            $('.time-entry.previous').addClass('show-prev');
+          }
         }
 
         $(document).on('click', '.time-entry', function () {
           let clickedIndex = $(this).data('index');
+          let direction = clickedIndex > activeIndex ? 'next' : 'prev';
+
           if (clickedIndex !== activeIndex) {
             activeIndex = clickedIndex;
-            updateTimes();
+            updateTimes(direction);
           }
         });
 

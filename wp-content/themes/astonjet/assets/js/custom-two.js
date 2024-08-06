@@ -38,32 +38,37 @@ jQuery(document).ready(function ($) {
   // start Elementor_fly_private_first_section_Widget
 
   var section = $(".fly_private_first_section-main-container");
-  var imgContainer = $(".fly_private_first_section-img-container");
-  var imgShadow = $(".fly_private_first_section-img-container::before");
-  var win = $(window);
+  if (section.length > 0) {
+    var imgContainer = $(".fly_private_first_section-img-container");
+    var imgShadow = $(".fly_private_first_section-img-container::before");
+    var win = $(window);
 
-  win.on("scroll", function () {
-    var scrollTop = win.scrollTop();
-    var offsetTop = section.offset().top;
-    var sectionHeight = section.outerHeight();
-    var windowHeight = win.height();
+    win.on("scroll", function () {
+      var scrollTop = win.scrollTop();
+      var offsetTop = section.offset().top;
+      var sectionHeight = section.outerHeight();
+      var windowHeight = win.height();
 
-    if (
-      scrollTop > offsetTop - windowHeight &&
-      scrollTop < offsetTop + sectionHeight
-    ) {
-      imgContainer.css("opacity", "1");
-      imgContainer.find("img").css({
-        animation:
-          "fly_private_first_section-img-animation 2s ease-in-out forwards",
-      });
-      imgShadow.css({
-        animation:
-          "fly_private_first_section-img-container-shadow-animation 1s ease-in-out forwards",
-        "animation-delay": "2s",
-      });
-    }
-  });
-
+      if (
+        scrollTop > offsetTop - windowHeight &&
+        scrollTop < offsetTop + sectionHeight
+      ) {
+        imgContainer.css("opacity", "1");
+        imgContainer.find("img").css({
+          animation:
+            "fly_private_first_section-img-animation 2s ease-in-out forwards",
+        });
+        imgShadow.css({
+          animation:
+            "fly_private_first_section-img-container-shadow-animation 1s ease-in-out forwards",
+          "animation-delay": "2s",
+        });
+      }
+    });
+  }
   // end Elementor_fly_private_first_section_Widget
+
+  // start Elementor_time_roulette_Widget
+  // js needed in widget file
+  // end Elementor_time_roulette_Widget
 });
