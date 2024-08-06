@@ -58,11 +58,18 @@ class Elementor_time_roulette_Widget extends \Elementor\Widget_Base
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
+        height: 70%;
       }
 
       .time-entry {
         cursor: pointer;
-        position: relative;
+        position: absolute;
+        opacity: 0;
+        animation: fadeIn 5s forwards;
+      }
+
+      .time-entry.active .time::before {
+        opacity: 1;
       }
 
       .time-entry .time::before {
@@ -77,6 +84,7 @@ class Elementor_time_roulette_Widget extends \Elementor\Widget_Base
         top: 40%;
         left: -44px;
         transform: translateY(-50%);
+        opacity: 0.5;
       }
 
       .time-entry .time {
@@ -110,12 +118,32 @@ class Elementor_time_roulette_Widget extends \Elementor\Widget_Base
         height: 100%;
       }
 
-      .time-entry.active{
+      .time-entry.active {
         left: 145px;
+        top: 50%;
+        transform: translateY(-50%);
       }
-      .time-entry.next{
+
+      .time-entry.next {
         left: 115px;
-        transform: rotate(45deg);
+        transform: rotate(30deg);
+        bottom: 0;
+      }
+
+      .time-entry.previous {
+        left: 115px;
+        transform: rotate(-30deg);
+        top: 0;
+      }
+/* active-to-prev  */
+      @keyframes active-to-prev {
+        0% {
+          opacity: 0.5;
+        }
+
+        100% {
+          opacity: 1;
+        }
       }
     </style>
     <div class="time_roulette-main-container">
@@ -141,27 +169,27 @@ class Elementor_time_roulette_Widget extends \Elementor\Widget_Base
             if (i === activeIndex) {
               entryClass += ' active';
               $('#time-list').append(`
-                                            <div class="${entryClass}" data-index="${i}">
-                                                <div class="time">${times[i].time}</div>
-                                                <div class="text">${times[i].text}</div>
-                                            </div>
-                                        `);
+                                                <div class="${entryClass}" data-index="${i}">
+                                                    <div class="time">${times[i].time}</div>
+                                                    <div class="text">${times[i].text}</div>
+                                                </div>
+                                            `);
             } else if (i === activeIndex - 1) {
               entryClass += ' previous';
               $('#time-list').append(`
-                                            <div class="${entryClass}" data-index="${i}">
-                                                <div class="time">${times[i].time}</div>
-                                                <div class="text">${times[i].text}</div>
-                                            </div>
-                                        `);
+                                                <div class="${entryClass}" data-index="${i}">
+                                                    <div class="time">${times[i].time}</div>
+                                                    <div class="text">${times[i].text}</div>
+                                                </div>
+                                            `);
             } else if (i === activeIndex + 1) {
               entryClass += ' next';
               $('#time-list').append(`
-                                            <div class="${entryClass}" data-index="${i}">
-                                                <div class="time">${times[i].time}</div>
-                                                <div class="text">${times[i].text}</div>
-                                            </div>
-                                        `);
+                                                <div class="${entryClass}" data-index="${i}">
+                                                    <div class="time">${times[i].time}</div>
+                                                    <div class="text">${times[i].text}</div>
+                                                </div>
+                                            `);
             }
           }
 

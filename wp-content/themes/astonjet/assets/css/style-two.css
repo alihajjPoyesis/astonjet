@@ -54,14 +54,17 @@
 
 .anchor-scroller-link {
   position: relative;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .anchor-scroller-title,
 .anchor-scroller-link {
-  padding-bottom: 15px;
+  padding-bottom: 0px;
 }
 
+.anchor-scroller-link:hover,
 .anchor-scroller-link.active {
+  background-image: url('https://poyesisdemo.fr/astonjet/wp-content/uploads/2024/08/9ff488ef0aee8292a7980cb531486062-scaled.webp') !important;
   background-size: cover !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent;
@@ -70,7 +73,7 @@
 .anchor-scroller-link.active::before {
   content: "";
   position: absolute;
-  bottom: 0;
+  bottom: -10px;
   width: 100%;
   left: 0;
 }
