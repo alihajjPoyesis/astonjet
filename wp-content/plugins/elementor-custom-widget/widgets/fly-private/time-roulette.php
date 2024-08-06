@@ -281,9 +281,6 @@ class Elementor_time_roulette_Widget extends \Elementor\Widget_Base
     $settings = $this->get_settings_for_display();
     $times = $settings['times'];
     ?>
-    <style>
-
-    </style>
     <div class="time_roulette-main-container">
       <div class="time-image bg-img-changer"></div>
       <div class="time_roulette-right-section">
