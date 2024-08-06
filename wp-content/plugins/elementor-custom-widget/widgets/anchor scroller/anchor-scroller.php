@@ -90,6 +90,23 @@ class Elementor_anchor_scroller_Widget extends \Elementor\Widget_Base
       ]
     );
 
+    $this->add_control(
+      'button_text',
+      [
+        'label' => esc_html__('Button Text', 'custom-widget'),
+        'type' => \Elementor\Controls_Manager::TEXT,
+        'default' => esc_html__('Download brochure', 'custom-widget'),
+      ]
+    );
+
+    $this->add_control(
+      'button_link',
+      [
+        'label' => esc_html__('Button Link', 'custom-widget'),
+        'type' => \Elementor\Controls_Manager::TEXT,
+      ]
+    );
+
     $this->end_controls_section();
 
     // Style section for title typography and background
@@ -139,6 +156,7 @@ class Elementor_anchor_scroller_Widget extends \Elementor\Widget_Base
         'selector' => '{{WRAPPER}} a.anchor-scroller-link',
       ]
     );
+
     // Style section for active anchors
     $this->add_group_control(
       \Elementor\Group_Control_Typography::get_type(),
@@ -225,6 +243,13 @@ class Elementor_anchor_scroller_Widget extends \Elementor\Widget_Base
         }
       }
       ?>
+      <div class="header_contact_button_wrap button_no_hover">
+        <div class="header_contact_button">
+          <a href="<?= ($settings['button_link']); ?>">
+            <?php echo esc_html($settings['button_text']); ?>
+          </a>
+        </div>
+      </div>
     </div>
     <?php
   }

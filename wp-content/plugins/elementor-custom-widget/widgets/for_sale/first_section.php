@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
@@ -79,39 +78,129 @@ class Elementor_First_Section_Widget extends \Elementor\Widget_Base
             ]
         );
 
-        $this->add_control(
-            'max_passengers',
+        $this->end_controls_section();
+
+        $sections = [
+            'max_passengers' => 'Maximum Passengers',
+            'cabin_height_width' => 'Cabin Height / Width',
+            'max_range' => 'Maximum Range',
+            'interior_zones' => 'Interior Zones'
+        ];
+
+        foreach ($sections as $section => $label) {
+            $this->start_controls_section(
+                $section . '_section',
+                [
+                    'label' => esc_html__($label, 'custom-widget'),
+                    'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+                ]
+            );
+
+            $this->add_control(
+                $section . '_icon',
+                [
+                    'label' => esc_html__($label . ' Icon', 'custom-widget'),
+                    'type' => \Elementor\Controls_Manager::ICONS,
+                    'default' => [
+                        'value' => 'fa fa-info-circle',
+                        'library' => 'fa-solid',
+                    ],
+                ]
+            );
+
+            $this->add_control(
+                $section . '_title',
+                [
+                    'label' => esc_html__($label . ' Title', 'custom-widget'),
+                    'type' => \Elementor\Controls_Manager::TEXT,
+                    'default' => esc_html__($label, 'custom-widget'),
+                ]
+            );
+
+            $this->add_control(
+                $section,
+                [
+                    'label' => esc_html__($label, 'custom-widget'),
+                    'type' => \Elementor\Controls_Manager::TEXT,
+                    'default' => esc_html__('Value', 'custom-widget'),
+                ]
+            );
+
+            $this->end_controls_section();
+        }
+
+        $this->start_controls_section(
+            'style_section',
             [
-                'label' => esc_html__('Maximum Passengers', 'custom-widget'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => esc_html__('14', 'custom-widget'),
+                'label' => esc_html__('Style', 'custom-widget'),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'section_title_typography',
+                'label' => esc_html__('Section Title Typography', 'custom-widget'),
+                'selector' => '{{WRAPPER}} .first_section_content_title',
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'section_year_typography',
+                'label' => esc_html__('Section Title Year', 'custom-widget'),
+                'selector' => '{{WRAPPER}} .first_section_content_year',
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'section_serial_typography',
+                'label' => esc_html__('Section Title Serial', 'custom-widget'),
+                'selector' => '{{WRAPPER}} .first_section_content_serial',
             ]
         );
 
         $this->add_control(
-            'cabin_height_width',
+            'detail_title_color',
             [
-                'label' => esc_html__('Cabin Height / Width', 'custom-widget'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => esc_html__('6 ft 2 in / 7 ft 8 in', 'custom-widget'),
+                'label' => esc_html__('Detail Title Color', 'custom-widget'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .detail_title' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'detail_title_typography',
+                'label' => esc_html__('Detail Title Typography', 'custom-widget'),
+                'selector' => '{{WRAPPER}} .detail_title',
             ]
         );
 
         $this->add_control(
-            'max_range',
+            'detail_value_color',
             [
-                'label' => esc_html__('Maximum Range', 'custom-widget'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => esc_html__('5950 nm', 'custom-widget'),
+                'label' => esc_html__('Detail Value Color', 'custom-widget'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .detail_value' => 'color: {{VALUE}}',
+                ],
             ]
         );
 
-        $this->add_control(
-            'interior_zones',
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
             [
-                'label' => esc_html__('Interior Zones', 'custom-widget'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => esc_html__('4 zones', 'custom-widget'),
+                'name' => 'detail_title_value',
+                'label' => esc_html__('Detail Value Typography', 'custom-widget'),
+                'selector' => '{{WRAPPER}} .detail_value',
             ]
         );
 
@@ -122,20 +211,41 @@ class Elementor_First_Section_Widget extends \Elementor\Widget_Base
     {
         $settings = $this->get_settings_for_display();
 
-        echo '<div class="first_section">';
+        echo '<div class="first_section_widget">';
         echo '<img src="' . esc_url($settings['image']['url']) . '" alt="' . esc_attr($settings['title']) . '">';
         echo '<div class="first_section_content">';
         echo '<div class="first_section_content_title">' . esc_html($settings['title']) . '</div>';
         echo '<div class="first_section_content_year">' . esc_html($settings['year']) . '</div>';
         echo '<div class="first_section_content_serial">' . esc_html($settings['serial_number']) . '</div>';
         echo '</div>';
-        echo '<div class="details">';
-        echo '<div class="detail"><div>Maximum Passengers:</div> <div>' . esc_html($settings['max_passengers']) . '</div ></div>';
-        echo '<div class="detail"><div>Cabin Height / Width:</div> <div>' . esc_html($settings['cabin_height_width']) . '</div> </div>';
-        echo '<div class="detail"><div>Maximum Range:</div> <div>' . esc_html($settings['max_range']) . '</div> </div>';
-        echo '<div class="detail"><div>Interior Zones:</div> <div>' . esc_html($settings['interior_zones']) . '</div> </div>';
+        echo '<div class="details flex flex-row align-i-center justify-between">';
+        echo '<div class="detail_wrap flex flex-row align-i-center justify-between">';
+
+        $sections = ['max_passengers', 'cabin_height_width', 'max_range', 'interior_zones'];
+        $totalSections = count($sections);
+        $currentSection = 1;
+
+        foreach ($sections as $section) {
+            echo '<div class="detail">';
+            echo '<div class="detail_content">';
+            echo '<div class="detail_title">' . esc_html($settings[$section . '_title']) . '</div>';
+            echo '<div class="detail_value">' . esc_html($settings[$section]) . '</div>';
+            echo '</div>';
+            echo '<div class="detail_icon">';
+            \Elementor\Icons_Manager::render_icon($settings[$section . '_icon'], ['aria-hidden' => 'true']);
+            echo '</div>';
+            echo '</div>';
+
+            if ($currentSection < $totalSections) {
+                echo '<div class="blue_spacer"></div>';
+            }
+
+            $currentSection++;
+        }
+
+
+        echo '</div>';
         echo '</div>';
         echo '</div>';
     }
-
 }
