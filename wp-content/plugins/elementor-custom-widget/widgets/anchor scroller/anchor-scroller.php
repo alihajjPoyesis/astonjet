@@ -243,13 +243,19 @@ class Elementor_anchor_scroller_Widget extends \Elementor\Widget_Base
         }
       }
       ?>
+      <?php
+      if($settings['button_text'] && $settings['button_link']){
+      ?>
       <div class="header_contact_button_wrap button_no_hover">
         <div class="header_contact_button">
-          <a href="<?= ($settings['button_link']); ?>">
+          <a href="<?php echo $settings['button_link']; ?>">
             <?php echo esc_html($settings['button_text']); ?>
           </a>
         </div>
       </div>
+      <?php
+      }
+      ?>
     </div>
     <?php
   }
