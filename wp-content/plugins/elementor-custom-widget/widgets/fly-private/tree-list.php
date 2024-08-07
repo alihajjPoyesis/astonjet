@@ -214,6 +214,37 @@ class Elementor_tree_list_Widget extends \Elementor\Widget_Base
       ]
     );
     $this->end_controls_section();
+
+    // Adding the mobile style section
+    $this->start_controls_section(
+      'mobile_style_section',
+      [
+        'label' => esc_html__('Mobile Style', 'custom-widget'),
+        'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+      ]
+    );
+
+    $this->add_control(
+      'mobile_text_color',
+      [
+        'label' => esc_html__('Mobile Text Color', 'custom-widget'),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'selectors' => [
+          '{{WRAPPER}} .tree_list-floating-mobile-text' => 'color: {{VALUE}}',
+        ],
+      ]
+    );
+
+    $this->add_group_control(
+      \Elementor\Group_Control_Typography::get_type(),
+      [
+        'name' => 'mobile_text_typography',
+        'label' => esc_html__('Mobile Text Typography', 'custom-widget'),
+        'selector' => '{{WRAPPER}} .tree_list-floating-mobile-text',
+      ]
+    );
+
+    $this->end_controls_section();
   }
 
   protected function render()
@@ -226,18 +257,33 @@ class Elementor_tree_list_Widget extends \Elementor\Widget_Base
           $('.lists-tree .single-list-tree').removeClass('active');
           $item.addClass('active');
           var bgImage = $item.data('bg-image');
+
+          $('.tree_list-bg').css('background-image', 'url(' + bgImage + ')');
+        }
+
+        function setMobileActiveListItem($item) {
+          $('.tree_list-container.hide-before-mobile .lists-tree .single-list-tree').removeClass('active');
+          $item.addClass('active');
+          var bgImage = $item.data('bg-image');
+          var floatingText = $item.data('floating-text');
+
+          $('.tree_list-container.hide-before-mobile .tree_list-floating-mobile-text').text(floatingText);
           $('.tree_list-bg').css('background-image', 'url(' + bgImage + ')');
         }
 
         // Set the first item as active initially
         setActiveListItem($('.lists-tree .single-list-tree').first());
+        setMobileActiveListItem($('.tree_list-container.hide-before-mobile .lists-tree .single-list-tree').first());
 
-        $('.lists-tree .single-list-tree').on('click', function () {
+        $('.tree_list-container.hide-on-mobile .lists-tree .single-list-tree').on('click', function () {
           setActiveListItem($(this));
+        });
+        $('.tree_list-container.hide-before-mobile .single-list-tree').on('click', function () {
+          setMobileActiveListItem($(this));
         });
       });
     </script>
-    <div class="tree_list-container">
+    <div class="tree_list-container hide-on-mobile">
       <div class="tree_list-bg"></div>
       <div class="tree_list-right-section">
         <div class="content-container">
@@ -252,6 +298,34 @@ class Elementor_tree_list_Widget extends \Elementor\Widget_Base
             <?php endif; ?>
             <div class="single-list-tree" data-bg-image="<?php echo esc_url($item['list_item_image']['url']); ?>">
               <?php echo esc_html($item['list_item_title']); ?>
+            </div>
+          <?php endforeach; ?>
+        </div>
+      </div>
+    </div>
+
+    <div class="tree_list-container hide-before-mobile">
+      <div class="tree_list-floating-mobile-text"></div>
+      <div class="tree_list-bg"></div>
+      <div class="tree_list-right-section">
+        <div class="content-container">
+          <div class="title text-clip-bg"><?php echo esc_html($settings['title']); ?></div>
+          <div class="sub-title"><?php echo esc_html($settings['sub_title']); ?></div>
+          <div class="description"><?php echo esc_html($settings['description']); ?></div>
+        </div>
+        <div class="lists-tree">
+          <?php foreach ($settings['list_items'] as $index => $item): ?>
+            <div class="single-list-tree" data-floating-text="<?php echo esc_html($item['list_item_title']); ?>"
+              data-bg-image="<?php echo esc_url($item['list_item_image']['url']); ?>">
+              <svg class="default-white-circle" width="15" height="15" viewBox="0 0 15 15" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <rect x="0.5" y="0.5" width="14" height="14" rx="7" stroke="white" />
+              </svg>
+              <svg class="active-white-circle" width="15" height="15" viewBox="0 0 15 15" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <rect x="0.5" y="0.5" width="14" height="14" rx="7" stroke="white" />
+                <circle cx="7.5" cy="7.5" r="2.5" fill="white" />
+              </svg>
             </div>
           <?php endforeach; ?>
         </div>
