@@ -33,6 +33,7 @@ function register_custom_widget($widgets_manager)
   require_once (__DIR__ . '/widgets/anchor scroller/anchor-scroller.php');
   require_once (__DIR__ . '/widgets/fly-private/first-section.php');
   require_once (__DIR__ . '/widgets/fly-private/time-roulette.php');
+  require_once (__DIR__ . '/widgets/airplane_table/airplane_table.php');
 
   $widgets_manager->register(new \Elementor_Contact_Button_Widget());
   $widgets_manager->register(new \Elementor_Cities_Carousel_Widget());
@@ -41,5 +42,6 @@ function register_custom_widget($widgets_manager)
   $widgets_manager->register(new \Elementor_anchor_scroller_Widget());
   $widgets_manager->register(new \Elementor_fly_private_first_section_Widget());
   $widgets_manager->register(new \Elementor_time_roulette_Widget());
+  $widgets_manager->register(new \Elementor_Airplane_Table_Widget());
 }
 add_action('elementor/widgets/register', 'register_custom_widget');

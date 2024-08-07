@@ -1306,6 +1306,10 @@ a:active {
 	padding-inline: 11px;
 }
 
+.remove-margin p {
+	margin-bottom: 0;
+}
+
 /* Elementor_Contact_Button_Widget */
 .header_contact_button_wrap {
 	position: relative;
@@ -1462,6 +1466,58 @@ a:active {
 	width: 2px;
 	height: 100px;
 	background-color: var(--blue);
+}
+
+
+/* Elementor_Airplane_Table_Widget */
+.airplane_table {
+	background-color: #fff;
+	padding: 44px 68px 78px 68px;
+	border-radius: 90px;
+	font-size: 18px;
+}
+
+.airplane_table .first_row {
+	border: 0;
+}
+
+.airplane_table table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.airplane_table th {
+	font-size: 24px;
+}
+
+.airplane_table th,
+.airplane_table td {
+	padding: 8px;
+}
+
+.airplane_table th {
+	background: rgba(2, 3, 4, 0.1);
+	text-align: right;
+}
+
+.airplane_table td {
+	text-align: right;
+	border-color: rgba(43, 43, 43, 1);
+	border-bottom: 1px solid;
+}
+
+.airplane_table .text-left {
+	text-align: left;
+}
+
+.airplane_table .border-left {
+	border-radius: 20px 0 0px 20px;
+	padding-left: 15px;
+}
+
+.airplane_table .border-right {
+	border-radius: 0px 20px 20px 0px;
+	padding-right: 15px;
 }
 
 @media only screen and (max-width: 1023px) {
