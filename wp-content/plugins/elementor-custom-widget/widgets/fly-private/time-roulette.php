@@ -319,8 +319,15 @@ class Elementor_time_roulette_Widget extends \Elementor\Widget_Base
               $(this).addClass('hidden');
             }
           });
-          $('.time-image').css('background-image', `url("${times[activeIndex].image.url}")`);
+          // $('.time-image').css('background-image', `url("${times[activeIndex].image.url}")`);
 
+          // Add fade-out class and change the background image
+      $('.time-image').removeClass('fade-in');
+      setTimeout(function() {
+        $('.time-image').css('background-image', `url("${times[activeIndex].image.url}")`);
+        $('.time-image').addClass('fade-in');
+      }, 10);
+      
           if (direction === 'next') {
             $('.time-entry.active').addClass('next-to-active');
             $('.time-entry.previous').addClass('active-to-prev');
