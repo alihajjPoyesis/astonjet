@@ -249,6 +249,7 @@ class Elementor_gallery_roulette_Widget extends \Elementor\Widget_Base
             autoplay: false,
             mouseDrag: false,
             touchDrag: false,
+            smartSpeed: 5000,
             responsive: {
               0: {
                 items: 1,
@@ -279,7 +280,7 @@ class Elementor_gallery_roulette_Widget extends \Elementor\Widget_Base
           // Add click event to the images in the carousel
           $('.gallery-images .item').on('click', function () {
             var index = $(this).data('index');
-            $galleryImages.trigger('to.owl.carousel', [index, 300]);
+            $galleryImages.trigger('to.owl.carousel', [index, 1500]);
             updateContent(index);
           });
           function updateContent(index) {
