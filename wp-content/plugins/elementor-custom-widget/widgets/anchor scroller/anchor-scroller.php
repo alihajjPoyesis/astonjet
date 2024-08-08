@@ -231,31 +231,33 @@ class Elementor_anchor_scroller_Widget extends \Elementor\Widget_Base
         <?php echo esc_html($settings['title_text']); ?>
       </div>
       <!-- Render the anchor tags -->
-      <?php
-      if (!empty($settings['anchors_list'])) {
-        foreach ($settings['anchors_list'] as $index => $item) {
+      <div class="centered-anchor-links">
+        <?php
+        if (!empty($settings['anchors_list'])) {
+          foreach ($settings['anchors_list'] as $index => $item) {
+            ?>
+            <a href="<?php echo esc_attr($item['anchor_href']); ?>"
+              class="anchor-scroller-link <?php echo $index === 0 ? 'active' : ''; ?>">
+              <?php echo esc_html($item['anchor_text']); ?>
+            </a>
+            <?php
+          }
+        }
+        ?>
+        <?php
+        if ($settings['button_text'] && $settings['button_link']) {
           ?>
-          <a href="<?php echo esc_attr($item['anchor_href']); ?>"
-            class="anchor-scroller-link <?php echo $index === 0 ? 'active' : ''; ?>">
-            <?php echo esc_html($item['anchor_text']); ?>
-          </a>
+          <div class="header_contact_button_wrap button_no_hover">
+            <div class="header_contact_button">
+              <a href="<?php echo $settings['button_link']; ?>">
+                <?php echo esc_html($settings['button_text']); ?>
+              </a>
+            </div>
+          </div>
           <?php
         }
-      }
-      ?>
-      <?php
-      if($settings['button_text'] && $settings['button_link']){
-      ?>
-      <div class="header_contact_button_wrap button_no_hover">
-        <div class="header_contact_button">
-          <a href="<?php echo $settings['button_link']; ?>">
-            <?php echo esc_html($settings['button_text']); ?>
-          </a>
-        </div>
+        ?>
       </div>
-      <?php
-      }
-      ?>
     </div>
     <?php
   }

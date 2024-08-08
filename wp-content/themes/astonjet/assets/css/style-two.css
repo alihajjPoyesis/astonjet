@@ -33,14 +33,16 @@
   }
 }
 
-@media(max-width:767px){
-  .animated-first-section-main-container{
+@media(max-width:767px) {
+  .animated-first-section-main-container {
     place-items: end center;
   }
-    .animated-first-section-main-container .animated-first-section-title{
-      padding-bottom: 100px;
-    }
+
+  .animated-first-section-main-container .animated-first-section-title {
+    padding-bottom: 100px;
+  }
 }
+
 /* End Elementor_animated_first_section_Widget */
 
 
@@ -50,10 +52,17 @@
   display: flex;
   align-items: center;
   white-space: nowrap;
-  column-gap: 8%;
   overflow-x: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
+}
+
+.centered-anchor-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  column-gap: 50px;
 }
 
 .anchor-scroller-main-container::-webkit-scrollbar {
@@ -203,7 +212,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
   opacity: 0;
 }
 
@@ -469,11 +478,13 @@ transition: all 0.5s ease-in-out;
   transform: scale(1);
 }
 
-.owl-stage-outer, .owl-carousel .owl-stage,.owl-carousel.owl-loaded .owl-item{
+.owl-stage-outer,
+.owl-carousel .owl-stage,
+.owl-carousel.owl-loaded .owl-item {
   height: 100%;
 }
 
-.owl-carousel .owl-item img{
+.owl-carousel .owl-item img {
   height: 620px;
   width: 500px !important;
 }
@@ -482,7 +493,8 @@ transition: all 0.5s ease-in-out;
   height: 620px;
 }
 
-.gallery-number.active svg.default-white-circle,.gallery-number:not(.active) svg.active-white-circle {
+.gallery-number.active svg.default-white-circle,
+.gallery-number:not(.active) svg.active-white-circle {
   display: none;
 }
 
@@ -492,32 +504,47 @@ transition: all 0.5s ease-in-out;
   justify-content: center;
   align-items: center;
 }
+
 /* end Elementor_gallery_roulette_Widget */
 
 @media(max-width: 1100px) {
-  .gallery-roulette #gallery-text-content-container {
-      width: 100%;
-    }
-    .gallery-roulette #gallery-text-content-container .gallery-text-content {
-      padding-left: 15px;
-      padding-right: 15px;
-    }
-    .gallery-roulette .gallery-images {
-      width: 100%;
-      height: unset;
-      margin-bottom: 30px;
-    }
-.owl-carousel .owl-item img {
-  height: 394px;
-  width: 319px !important;
-}
+  .anchor-scroller-title {
+    margin-right: 30px;
+  }
 
-.owl-carousel .owl-item .item {
-  height: 394px;
-}
-.gallery-roulette .gallery-images .owl-item img{
+  .centered-anchor-links {
+    width: unset;
+    column-gap: 30px;
+  }
+
+  .gallery-roulette #gallery-text-content-container {
+    width: 100%;
+  }
+
+  .gallery-roulette #gallery-text-content-container .gallery-text-content {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .gallery-roulette .gallery-images {
+    width: 100%;
+    height: unset;
+    margin-bottom: 30px;
+  }
+
+  .owl-carousel .owl-item img {
+    height: 394px;
+    width: 319px !important;
+  }
+
+  .owl-carousel .owl-item .item {
+    height: 394px;
+  }
+
+  .gallery-roulette .gallery-images .owl-item img {
     transform: scale(1);
-}
+  }
+
   /* .gallery-roulette .gallery-images img.active {
     transform: translateX(-50%) scale(0.8);
   }
@@ -532,26 +559,29 @@ transition: all 0.5s ease-in-out;
   }
 }
 
-@media(min-width: 1001px){
-  .hide-before-mobile{
+@media(min-width: 1001px) {
+  .hide-before-mobile {
     display: none;
   }
 }
 
-@media(min-width: 1101px){
-  .hide-before-1100{
+@media(min-width: 1101px) {
+  .hide-before-1100 {
     display: none;
   }
 }
+
 @media(max-width: 1100px) {
-  .hide-on-1100{
+  .hide-on-1100 {
     display: none;
   }
 }
+
 @media(max-width: 1000px) {
   .hide-on-mobile {
-      display: none;
-    }
+    display: none;
+  }
+
   .time_roulette-right-section {
     right: unset;
     left: 0;
@@ -561,9 +591,9 @@ transition: all 0.5s ease-in-out;
     padding: 30px 25px;
   }
 
-    .bg-img-changer {
-      background-position: top center;
-    }
+  .bg-img-changer {
+    background-position: top center;
+  }
 
   .time_roulette-main-container {
     min-height: 900px;
@@ -722,89 +752,139 @@ transition: all 0.5s ease-in-out;
 /* end Elementor_time_roulette_Widget */
 
 /* start Elementor_tree_list_Widget */
- .tree_list-container {
-   min-height: 100vh;
- }
-
- .tree_list-bg {
-   transition: background-image 0.3s ease;
-   background-size: cover;
-   background-position: center;
-   position: absolute;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
- }
-
- .tree_list-right-section {
-   position: relative;
-   float: right;
-   padding: 120px 70px;
-   height: 100%;
-   background-color: #141a1fd9;
-   text-align: center;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   flex-direction: column;
-   row-gap: 120px;
- }
-
- .tree_list-right-section .content-container {
-   max-width: 455px;
- }
-
- .lists-tree {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
- }
-
- .lists-tree .single-list-tree {
-   cursor: pointer;
- }
-
- .list-separator {
-   width: 1px;
-   height: 30px;
-   background-color: white;
-   margin: 10px 0;
- }
-
- @media(max-width: 1000px) {
-   .tree_list-right-section {
-     bottom: 0;
-     height: unset;
-     position: absolute;
-     width: 100%;
-     padding: 20px;
-     row-gap: 20px;
-   }
-
-   .lists-tree {
-     flex-direction: row;
-     column-gap: 10px;
-   }
-
-   .tree_list-bg {
-     background-position: top left;
-   }
-.tree_list-container{
-  min-height: 95vh;
+.tree_list-container {
+  min-height: 100vh;
 }
-   .tree_list-floating-mobile-text {
-     text-align: center;
-     position: absolute;
-     top: 35px;
-     left: 50%;
-     transform: translateX(-50%);
-     z-index: 1;
-   }
 
-   .lists-tree .single-list-tree.active svg.default-white-circle,
-   .lists-tree .single-list-tree:not(.active) svg.active-white-circle {
-     display: none;
-   }
- }
+.tree_list-bg {
+  transition: background-image 0.3s ease;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.tree_list-right-section {
+  position: relative;
+  float: right;
+  padding: 120px 70px;
+  height: 100%;
+  background-color: #141a1fd9;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 120px;
+}
+
+.tree_list-right-section .content-container {
+  max-width: 455px;
+}
+
+.lists-tree {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lists-tree .single-list-tree {
+  cursor: pointer;
+}
+
+.list-separator {
+  width: 1px;
+  height: 30px;
+  background-color: white;
+  margin: 10px 0;
+}
+
+@media(max-width: 1000px) {
+  .tree_list-right-section {
+    bottom: 0;
+    height: unset;
+    position: absolute;
+    width: 100%;
+    padding: 20px;
+    row-gap: 20px;
+  }
+
+  .lists-tree {
+    flex-direction: row;
+    column-gap: 10px;
+  }
+
+  .tree_list-bg {
+    background-position: top left;
+  }
+
+  .tree_list-container {
+    min-height: 95vh;
+  }
+
+  .tree_list-floating-mobile-text {
+    text-align: center;
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+
+  .lists-tree .single-list-tree.active svg.default-white-circle,
+  .lists-tree .single-list-tree:not(.active) svg.active-white-circle {
+    display: none;
+  }
+}
+
 /* end Elementor_tree_list_Widget */
+
+/* purchase your aircraft page */
+
+.purchase-your-aircraft-vertical-seperator {
+  width: 2px;
+  height: 74px;
+  background-color: #FFF;
+}
+
+/* start Elementor_biography_Widget */
+.bio-content-container {
+  position: absolute;
+  left: 55px;
+  bottom: 40px;
+}
+
+.biography-widget {
+  background-position: top left;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.bio-right-section-content-container {
+  height: 100%;
+  background-color: #141a1fd9;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 595px;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.bio-right-section-content-container img {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+/* end Elementor_biography_Widget */
