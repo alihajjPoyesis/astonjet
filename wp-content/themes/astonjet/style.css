@@ -1324,7 +1324,7 @@ a:active {
 	background-image: linear-gradient(#151515, #151515), linear-gradient(270deg, #979797 0%, #E9E9E9 30.5%, #FFFFFF 54.01%, #E1E1E1 67.5%, #8C8C8C 100%);
 	background-origin: border-box;
 	background-clip: content-box, border-box;
-	transition: all ease 0.2s;
+	transition: all ease 0.5s;
 }
 
 .header_contact_button_wrap.button_no_hover {
@@ -1351,7 +1351,8 @@ a:active {
 }
 
 .header_contact_content {
-	display: none;
+	visibility: hidden;
+	opacity: 0;
 	padding: 12px;
 	background-color: var(--black);
 	border-radius: 0px 0px 20px 20px;
@@ -1360,6 +1361,7 @@ a:active {
 	left: 0;
 	right: 0;
 	top: 35px;
+	transition: all 0.5s ease-in-out;
 }
 
 .header_contact_button_wrap img {
@@ -1388,7 +1390,8 @@ a:active {
 
 
 .header_contact_button_wrap:hover .header_contact_content {
-	display: block;
+	visibility: visible;
+	opacity: 1;
 }
 
 

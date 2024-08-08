@@ -36,6 +36,8 @@ function register_custom_widget($widgets_manager)
   require_once (__DIR__ . '/widgets/fly-private/tree-list.php');
   require_once (__DIR__ . '/widgets/fly-private/gallery-roulette.php');
   require_once (__DIR__ . '/widgets/purchase-your-aircraft/biography.php');
+  require_once (__DIR__ . '/widgets/header/burger-menu.php');
+  require_once (__DIR__ . '/widgets/footer/carousel-custom-pages.php');
 
   $widgets_manager->register(new \Elementor_Contact_Button_Widget());
   $widgets_manager->register(new \Elementor_Cities_Carousel_Widget());
@@ -47,5 +49,7 @@ function register_custom_widget($widgets_manager)
   $widgets_manager->register(new \Elementor_tree_list_Widget());
   $widgets_manager->register(new \Elementor_gallery_roulette_Widget());
   $widgets_manager->register(new \Elementor_biography_Widget());
+  $widgets_manager->register(new \Elementor_burger_menu_Widget());
+  $widgets_manager->register(new \Elementor_carousel_custom_pages_Widget());
 }
 add_action('elementor/widgets/register', 'register_custom_widget');

@@ -47,8 +47,6 @@ jQuery(document).ready(function ($) {
       windowScrollTop <= elementTop + elementHeight
     ) {
       $element.css("background-position-y", "70%");
-    } else {
-      $element.css("background-position-y", "100%");
     }
   });
 });
