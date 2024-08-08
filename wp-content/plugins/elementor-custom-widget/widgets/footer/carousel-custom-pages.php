@@ -139,8 +139,8 @@ class Elementor_carousel_custom_pages_Widget extends \Elementor\Widget_Base
         <div class="item">
           <?php if (!empty($slide['link']['url'])): ?>
             <a href="<?php echo esc_url($slide['link']['url']); ?>" <?php echo $slide['link']['is_external'] ? 'target="_blank"' : ''; ?>>
-              <?php endif; ?>
-              <div class="carousel-title"><?php echo esc_html($slide['title']); ?></div>
+            <?php endif; ?>
+            <div class="carousel-title"><?php echo esc_html($slide['title']); ?></div>
             <img src="<?php echo esc_url($slide['image']['url']); ?>">
             <?php if (!empty($slide['link']['url'])): ?>
             </a>
@@ -148,19 +148,6 @@ class Elementor_carousel_custom_pages_Widget extends \Elementor\Widget_Base
         </div>
       <?php endforeach; ?>
     </div>
-
-    <script>
-      jQuery(document).ready(function ($) {
-        $('.carousel-custom-pages.owl-carousel').owlCarousel({
-          loop: true,
-          margin: 10,
-          items: 2.5,
-          nav: false,
-          dots: false,
-          center: false,
-        });
-      });
-    </script>
     <?php
   }
 }

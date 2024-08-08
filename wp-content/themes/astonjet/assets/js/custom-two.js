@@ -71,4 +71,17 @@ jQuery(document).ready(function ($) {
   // start Elementor_time_roulette_Widget
   // js needed in widget file
   // end Elementor_time_roulette_Widget
+
+  // start Elementor_carousel_custom_pages_Widget
+  jQuery(document).ready(function ($) {
+    $(".carousel-custom-pages.owl-carousel").owlCarousel({
+      loop: true,
+      margin: 10,
+      items: 2.5,
+      nav: false,
+      dots: false,
+      center: false,
+    });
+  });
+  // end Elementor_carousel_custom_pages_Widget
 });
