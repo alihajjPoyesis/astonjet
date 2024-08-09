@@ -222,7 +222,7 @@ class Elementor_grid_gallery_Widget extends \Elementor\Widget_Base
           z-index: 2;
         }
 
-        .grid-gallery .content-container a {
+        .grid-gallery .content-container .grid-item-link {
           display: none;
           border: 1px solid #FFF;
           padding: 10px 30px;
@@ -232,7 +232,7 @@ class Elementor_grid_gallery_Widget extends \Elementor\Widget_Base
           margin-top: 15px;
         }
 
-        .grid-gallery .grid-item:hover .content-container a {
+        .grid-gallery .grid-item:hover .content-container .grid-item-link {
           display: block;
         }
 

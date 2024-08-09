@@ -246,10 +246,10 @@ class Elementor_gallery_roulette_Widget extends \Elementor\Widget_Base
             items: 2.5,
             margin: 10,
             center: false,
-            autoplay: false,
-            mouseDrag: false,
-            touchDrag: false,
-            smartSpeed: 5000,
+            autoplay: true,
+            mouseDrag: true,
+            touchDrag: true,
+            smartSpeed: 3000,
             responsive: {
               0: {
                 items: 1,
@@ -277,12 +277,14 @@ class Elementor_gallery_roulette_Widget extends \Elementor\Widget_Base
               updateContent(index);
             }
           });
+
           // Add click event to the images in the carousel
           $('.gallery-images .item').on('click', function () {
             var index = $(this).data('index');
             $galleryImages.trigger('to.owl.carousel', [index, 1500]);
             updateContent(index);
           });
+
           function updateContent(index) {
             var item = items[index % totalItems];
 
@@ -294,9 +296,11 @@ class Elementor_gallery_roulette_Widget extends \Elementor\Widget_Base
             $('.gallery-number').removeClass('active');
             $('.gallery-number[data-index="' + (index % totalItems) + '"]').addClass('active');
 
-            // Update the custom class for the first active item
+            // Remove 'first-active' class from all owl items
             $('.owl-item').removeClass('first-active');
-            $('.owl-item.active').first().addClass('first-active');
+
+            // Add 'first-active' class to the owl item that is the parent of the image corresponding to the specific index
+            $('.item[data-index="' + index + '"]').closest('.owl-item').addClass('first-active');
           }
 
           // Initial setup
@@ -312,9 +316,10 @@ class Elementor_gallery_roulette_Widget extends \Elementor\Widget_Base
           });
 
           // Add the custom class to the first active item initially
-          $('.owl-item.active').first().addClass('first-active');
+          updateContent(0); // Ensure initial setup applies the first-active class
         });
       </script>
+
       <?php
     }
   }
