@@ -61,9 +61,27 @@ class Elementor_biography_Widget extends \Elementor\Widget_Base
         'default' => esc_html__('Enter your description', 'custom-widget'),
       ]
     );
-
-    // Bio Text 1
+    // Image 2
     $this->add_control(
+      'image_two',
+      [
+        'label' => esc_html__('Image Two', 'custom-widget'),
+        'type' => \Elementor\Controls_Manager::MEDIA,
+      ]
+    );
+    // Image 2 mob
+    $this->add_control(
+      'image_two_mob',
+      [
+        'label' => esc_html__('Image Two Mobile', 'custom-widget'),
+        'type' => \Elementor\Controls_Manager::MEDIA,
+      ]
+    );
+
+    // Repeater for bio sections
+    $repeater = new \Elementor\Repeater();
+
+    $repeater->add_control(
       'bio_text_one',
       [
         'label' => esc_html__('Bio Text One', 'custom-widget'),
@@ -72,8 +90,7 @@ class Elementor_biography_Widget extends \Elementor\Widget_Base
       ]
     );
 
-    // Bio Text 2
-    $this->add_control(
+    $repeater->add_control(
       'bio_text_two',
       [
         'label' => esc_html__('Bio Text Two', 'custom-widget'),
@@ -82,21 +99,21 @@ class Elementor_biography_Widget extends \Elementor\Widget_Base
       ]
     );
 
-    // Image 1
-    $this->add_control(
-      'image_one',
+    $repeater->add_control(
+      'image',
       [
-        'label' => esc_html__('Image One', 'custom-widget'),
+        'label' => esc_html__('Background Image', 'custom-widget'),
         'type' => \Elementor\Controls_Manager::MEDIA,
       ]
     );
 
-    // Image 2
     $this->add_control(
-      'image_two',
+      'bio_sections',
       [
-        'label' => esc_html__('Image Two', 'custom-widget'),
-        'type' => \Elementor\Controls_Manager::MEDIA,
+        'label' => esc_html__('Bio Sections', 'custom-widget'),
+        'type' => \Elementor\Controls_Manager::REPEATER,
+        'fields' => $repeater->get_controls(),
+        'title_field' => '{{{ bio_text_one }}}',
       ]
     );
 
@@ -206,31 +223,41 @@ class Elementor_biography_Widget extends \Elementor\Widget_Base
   {
     $settings = $this->get_settings_for_display();
     ?>
-    <style>
-      .biography-widget {
-        background-image: url('<?php echo esc_url($settings['image_one']['url']); ?>');
-      }
-    </style>
     <div class="biography-widget">
-
       <div class="bio-right-section-content-container">
         <div class="biography-title text-clip-bg"><?php echo esc_html($settings['title']); ?></div>
-        <div class="biography-description"><?php echo esc_html($settings['description']); ?></div>
+        <div class="biography-description"><?php echo $settings['description']; ?></div>
         <?php if (!empty($settings['image_two']['url'])): ?>
           <img src="<?php echo esc_url($settings['image_two']['url']); ?>" class="biography-image-two" alt="">
         <?php endif; ?>
-      </div>
-
-      <div class="bio-content-container">
-        <?php if (!empty($settings['bio_text_one'])): ?>
-          <div class="biography-bio-text-one"><?php echo esc_html($settings['bio_text_one']); ?></div>
-        <?php endif; ?>
-        <?php if (!empty($settings['bio_text_two'])): ?>
-          <div class="biography-bio-text-two"><?php echo esc_html($settings['bio_text_two']); ?></div>
+        <?php if (!empty($settings['image_two_mob']['url'])): ?>
+          <img src="<?php echo esc_url($settings['image_two_mob']['url']); ?>" class="biography-image-two-mob" alt="">
         <?php endif; ?>
       </div>
 
+      <div class="owl-carousel">
+        <?php foreach ($settings['bio_sections'] as $item): ?>
+          <div class="biography-item">
+            <div class="biography-widget-bg" style="background-image: url('<?php echo esc_url($item['image']['url']); ?>');">
+            </div>
+            <div class="bio-content-container">
+              <div class="biography-bio-text-one"><?php echo esc_html($item['bio_text_one']); ?></div>
+              <div class="biography-bio-text-two"><?php echo esc_html($item['bio_text_two']); ?></div>
+            </div>
+          </div>
+        <?php endforeach; ?>
+      </div>
     </div>
+    <script>
+      jQuery(document).ready(function ($) {
+        $('.biography-widget .owl-carousel').owlCarousel({
+          items: 1,
+          loop: true,
+          nav: false,
+          dots: false,
+        });
+      });
+    </script>
     <?php
   }
 }
