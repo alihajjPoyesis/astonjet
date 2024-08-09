@@ -912,7 +912,7 @@
   height: 211px !important;
 }
 
-.carousel-custom-pages.owl-carousel .owl-item .item{
+.carousel-custom-pages.owl-carousel .owl-item .item {
   height: unset;
 }
 
@@ -923,8 +923,4 @@
   align-items: center;
   margin-bottom: 20px;
   text-align: center;
-}
-
-.testhome{
-  
 }
